@@ -773,7 +773,7 @@ get_mvgam_priors = function(formula,
                                  )))
 
       } else {
-        trend_df <- data.frame(param_name = c('vector<lower=0>[n_series] sigma'),
+        trend_df <- data.frame(param_name = c('vector<lower=0>[1] sigma'),
                                param_length = length(unique(data_train$series)),
                                param_info = 'trend sd (for each series s)',
                                prior = c('sigma[1] ~ dexp(1)T(0.075, 5)'),
