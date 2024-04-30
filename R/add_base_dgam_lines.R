@@ -135,7 +135,7 @@ add_base_dgam_lines = function(use_lv, stan = FALSE, offset = FALSE){
     row_vector[num_basis] b_raw;
 
     // latent trend variance parameters
-    vector<lower=0>[1] sigma;
+    vector<lower=0>[n_series] sigma;
 
     // latent trends
     matrix[n, n_series] trend;
@@ -165,11 +165,11 @@ add_base_dgam_lines = function(use_lv, stan = FALSE, offset = FALSE){
 
     // trend estimates
     for (s in 1:n_series) {
-    trend[1, s] ~ normal(0, sigma[1]);
+    trend[1, s] ~ normal(0, sigma[s]);
     }
 
     for (s in 1:n_series) {
-    trend[2:n, s] ~ normal(trend[1:(n - 1), s], sigma[1]);
+    trend[2:n, s] ~ normal(trend[1:(n - 1), s], sigma[s]);
     }
 
     // likelihood functions
@@ -187,7 +187,7 @@ add_base_dgam_lines = function(use_lv, stan = FALSE, offset = FALSE){
     matrix[n, n_series] ypred;
     rho = log(lambda);
     for (s in 1:n_series) {
-    tau[s] = pow(sigma[1], -2.0);
+    tau[s] = pow(sigma[s], -2.0);
     }
 
     // posterior predictions
@@ -380,8 +380,8 @@ add_base_dgam_lines = function(use_lv, stan = FALSE, offset = FALSE){
                           ar1[s] ~ dnorm(0, 10)
                           ar2[s] ~ dnorm(0, 10)
                           ar3[s] ~ dnorm(0, 10)
-                          tau[s] <- pow(sigma[1], -2)
-                          sigma[1] ~ dexp(2)T(0.075, 5)
+                          tau[s] <- pow(sigma[s], -2)
+                          sigma[s] ~ dexp(2)T(0.075, 5)
                           }
 
                           ## likelihood functions
