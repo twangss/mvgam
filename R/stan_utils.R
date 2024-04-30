@@ -2234,33 +2234,33 @@ vectorise_stan_lik = function(model_file, model_data, family = 'poisson',
     } else {
 
       if(drift){
-        init_trend_line <- grep('trend[1, s] ~ normal(0, sigma[s])',
+        init_trend_line <- grep('trend[1, s] ~ normal(0, sigma)',
                                 model_file, fixed = TRUE) - 1
         model_file <- model_file[-c(init_trend_line:(init_trend_line + 2))]
         model_file[init_trend_line] <-
           'trend[1, 1:n_series] ~ normal(0, sigma);'
 
-        remainder_line <- grep('trend[2:n, s] ~ normal(drift[s] + trend[1:(n - 1), s], sigma[s])',
+        remainder_line <- grep('trend[2:n, s] ~ normal(drift[s] + trend[1:(n - 1), s], sigma)',
                                model_file, fixed = TRUE) - 1
         model_file <- model_file[-c(remainder_line:(remainder_line + 2))]
         model_file[remainder_line] <-
           paste0('for(s in 1:n_series){\n',
-                 'trend[2:n, s] ~ normal(drift[s] + trend[1:(n - 1), s], sigma[s]);\n',
+                 'trend[2:n, s] ~ normal(drift[s] + trend[1:(n - 1), s], sigma);\n',
                  '}')
         model_file = readLines(textConnection(model_file), n = -1)
       } else {
-        init_trend_line <- grep('trend[1, s] ~ normal(0, sigma[s])',
+        init_trend_line <- grep('trend[1, s] ~ normal(0, sigma)',
                                 model_file, fixed = TRUE) - 1
         model_file <- model_file[-c(init_trend_line:(init_trend_line + 2))]
         model_file[init_trend_line] <-
           'trend[1, 1:n_series] ~ normal(0, sigma);'
 
-        remainder_line <- grep('trend[2:n, s] ~ normal(trend[1:(n - 1), s], sigma[s])',
+        remainder_line <- grep('trend[2:n, s] ~ normal(trend[1:(n - 1), s], sigma)',
                                model_file, fixed = TRUE) - 1
         model_file <- model_file[-c(remainder_line:(remainder_line + 2))]
         model_file[remainder_line] <-
           paste0('for(s in 1:n_series){\n',
-                 'trend[2:n, s] ~ normal(trend[1:(n - 1), s], sigma[s]);\n',
+                 'trend[2:n, s] ~ normal(trend[1:(n - 1), s], sigma);\n',
                  '}')
         model_file = readLines(textConnection(model_file), n = -1)
       }
@@ -2287,33 +2287,33 @@ vectorise_stan_lik = function(model_file, model_data, family = 'poisson',
       model_file = readLines(textConnection(model_file), n = -1)
     } else {
       if(drift){
-        init_trend_line <- grep('trend[1, s] ~ normal(0, sigma[s])',
+        init_trend_line <- grep('trend[1, s] ~ normal(0, sigma)',
                                 model_file, fixed = TRUE) - 1
         model_file <- model_file[-c(init_trend_line:(init_trend_line + 2))]
         model_file[init_trend_line] <-
           'trend[1, 1:n_series] ~ normal(0, sigma);'
 
-        remainder_line <- grep('trend[2:n, s] ~ normal(drift[s] + ar1[s] * trend[1:(n - 1), s], sigma[s])',
+        remainder_line <- grep('trend[2:n, s] ~ normal(drift[s] + ar1[s] * trend[1:(n - 1), s], sigma)',
                                model_file, fixed = TRUE) - 1
         model_file <- model_file[-c(remainder_line:(remainder_line + 2))]
         model_file[remainder_line] <-
           paste0('for(s in 1:n_series){\n',
-                 'trend[2:n, s] ~ normal(drift[s] + pow(ar1[s], to_vector(time_dis[2:n, s])) .* trend[1:(n - 1), s], sigma[s]);\n',
+                 'trend[2:n, s] ~ normal(drift[s] + pow(ar1[s], to_vector(time_dis[2:n, s])) .* trend[1:(n - 1), s], sigma);\n',
                  '}')
         model_file = readLines(textConnection(model_file), n = -1)
       } else {
-        init_trend_line <- grep('trend[1, s] ~ normal(0, sigma[s])',
+        init_trend_line <- grep('trend[1, s] ~ normal(0, sigma)',
                                 model_file, fixed = TRUE) - 1
         model_file <- model_file[-c(init_trend_line:(init_trend_line + 2))]
         model_file[init_trend_line] <-
           'trend[1, 1:n_series] ~ normal(0, sigma);'
 
-        remainder_line <- grep('trend[2:n, s] ~ normal(ar1[s] * trend[1:(n - 1), s], sigma[s])',
+        remainder_line <- grep('trend[2:n, s] ~ normal(ar1[s] * trend[1:(n - 1), s], sigma)',
                                model_file, fixed = TRUE) - 1
         model_file <- model_file[-c(remainder_line:(remainder_line + 2))]
         model_file[remainder_line] <-
           paste0('for(s in 1:n_series){\n',
-                 'trend[2:n, s] ~ normal(pow(ar1[s], to_vector(time_dis[2:n, s])) .* trend[1:(n - 1), s], sigma[s]);\n',
+                 'trend[2:n, s] ~ normal(pow(ar1[s], to_vector(time_dis[2:n, s])) .* trend[1:(n - 1), s], sigma);\n',
                  '}')
         model_file = readLines(textConnection(model_file), n = -1)
       }
@@ -2338,33 +2338,33 @@ vectorise_stan_lik = function(model_file, model_data, family = 'poisson',
       model_file = readLines(textConnection(model_file), n = -1)
     } else {
       if(drift){
-        init_trend_line <- grep('trend[1, s] ~ normal(0, sigma[s])',
+        init_trend_line <- grep('trend[1, s] ~ normal(0, sigma)',
                                 model_file, fixed = TRUE) - 1
         model_file <- model_file[-c(init_trend_line:(init_trend_line + 2))]
         model_file[init_trend_line] <-
           'trend[1, 1:n_series] ~ normal(0, sigma);'
 
-        remainder_line <- grep('trend[2:n, s] ~ normal(drift[s] + ar1[s] * trend[1:(n - 1), s], sigma[s])',
+        remainder_line <- grep('trend[2:n, s] ~ normal(drift[s] + ar1[s] * trend[1:(n - 1), s], sigma)',
                                model_file, fixed = TRUE) - 1
         model_file <- model_file[-c(remainder_line:(remainder_line + 2))]
         model_file[remainder_line] <-
           paste0('for(s in 1:n_series){\n',
-                 'trend[2:n, s] ~ normal(drift[s] + ar1[s] * trend[1:(n - 1), s], sigma[s]);\n',
+                 'trend[2:n, s] ~ normal(drift[s] + ar1[s] * trend[1:(n - 1), s], sigma);\n',
                  '}')
         model_file = readLines(textConnection(model_file), n = -1)
       } else {
-        init_trend_line <- grep('trend[1, s] ~ normal(0, sigma[s])',
+        init_trend_line <- grep('trend[1, s] ~ normal(0, sigma)',
                                 model_file, fixed = TRUE) - 1
         model_file <- model_file[-c(init_trend_line:(init_trend_line + 2))]
         model_file[init_trend_line] <-
           'trend[1, 1:n_series] ~ normal(0, sigma);'
 
-        remainder_line <- grep('trend[2:n, s] ~ normal(ar1[s] * trend[1:(n - 1), s], sigma[s])',
+        remainder_line <- grep('trend[2:n, s] ~ normal(ar1[s] * trend[1:(n - 1), s], sigma)',
                                model_file, fixed = TRUE) - 1
         model_file <- model_file[-c(remainder_line:(remainder_line + 2))]
         model_file[remainder_line] <-
           paste0('for(s in 1:n_series){\n',
-                 'trend[2:n, s] ~ normal(ar1[s] * trend[1:(n - 1), s], sigma[s]);\n',
+                 'trend[2:n, s] ~ normal(ar1[s] * trend[1:(n - 1), s], sigma);\n',
                  '}')
         model_file = readLines(textConnection(model_file), n = -1)
       }
@@ -2395,13 +2395,13 @@ vectorise_stan_lik = function(model_file, model_data, family = 'poisson',
       model_file = readLines(textConnection(model_file), n = -1)
     } else {
       if(drift){
-        init_trend_line <- grep('trend[1, s] ~ normal(0, sigma[s])',
+        init_trend_line <- grep('trend[1, s] ~ normal(0, sigma)',
                                 model_file, fixed = TRUE) - 1
         model_file <- model_file[-c(init_trend_line:(init_trend_line + 2))]
         model_file[init_trend_line] <-
           'trend[1, 1:n_series] ~ normal(0, sigma);'
 
-        second_line <- grep('trend[2, s] ~ normal(drift[s] + trend[1, s] * ar1[s], sigma[s])',
+        second_line <- grep('trend[2, s] ~ normal(drift[s] + trend[1, s] * ar1[s], sigma)',
                             model_file, fixed = TRUE) - 1
         model_file <- model_file[-c(second_line:(second_line + 2))]
         model_file[second_line] <-
@@ -2412,17 +2412,17 @@ vectorise_stan_lik = function(model_file, model_data, family = 'poisson',
         model_file <- model_file[-c(remainder_line:(remainder_line + 3))]
         model_file[remainder_line] <-
           paste0('for(s in 1:n_series){\n',
-                 'trend[3:n, s] ~ normal(drift[s] + ar1[s] * trend[2:(n - 1), s] + ar2[s] * trend[1:(n - 2), s], sigma[s]);\n',
+                 'trend[3:n, s] ~ normal(drift[s] + ar1[s] * trend[2:(n - 1), s] + ar2[s] * trend[1:(n - 2), s], sigma);\n',
                  '}')
         model_file = readLines(textConnection(model_file), n = -1)
       } else {
-        init_trend_line <- grep('trend[1, s] ~ normal(0, sigma[s])',
+        init_trend_line <- grep('trend[1, s] ~ normal(0, sigma)',
                                 model_file, fixed = TRUE) - 1
         model_file <- model_file[-c(init_trend_line:(init_trend_line + 2))]
         model_file[init_trend_line] <-
           'trend[1, 1:n_series] ~ normal(0, sigma);'
 
-        second_line <- grep('trend[2, s] ~ normal(trend[1, s] * ar1[s], sigma[s])',
+        second_line <- grep('trend[2, s] ~ normal(trend[1, s] * ar1[s], sigma)',
                             model_file, fixed = TRUE) - 1
         model_file <- model_file[-c(second_line:(second_line + 2))]
         model_file[second_line] <-
@@ -2433,7 +2433,7 @@ vectorise_stan_lik = function(model_file, model_data, family = 'poisson',
         model_file <- model_file[-c(remainder_line:(remainder_line + 3))]
         model_file[remainder_line] <-
           paste0('for(s in 1:n_series){\n',
-                 'trend[3:n, s] ~ normal(ar1[s] * trend[2:(n - 1), s] + ar2[s] * trend[1:(n - 2), s], sigma[s]);\n',
+                 'trend[3:n, s] ~ normal(ar1[s] * trend[2:(n - 1), s] + ar2[s] * trend[1:(n - 2), s], sigma);\n',
                  '}')
         model_file = readLines(textConnection(model_file), n = -1)
       }
@@ -2471,13 +2471,13 @@ vectorise_stan_lik = function(model_file, model_data, family = 'poisson',
       model_file = readLines(textConnection(model_file), n = -1)
     } else {
       if(drift){
-        init_trend_line <- grep('trend[1, s] ~ normal(0, sigma[s])',
+        init_trend_line <- grep('trend[1, s] ~ normal(0, sigma)',
                                 model_file, fixed = TRUE) - 1
         model_file <- model_file[-c(init_trend_line:(init_trend_line + 2))]
         model_file[init_trend_line] <-
           'trend[1, 1:n_series] ~ normal(0, sigma);'
 
-        second_line <- grep('trend[2, s] ~ normal(drift[s] + trend[1, s] * ar1[s], sigma[s])',
+        second_line <- grep('trend[2, s] ~ normal(drift[s] + trend[1, s] * ar1[s], sigma)',
                             model_file, fixed = TRUE) - 1
         model_file <- model_file[-c(second_line:(second_line + 2))]
         model_file[second_line] <-
@@ -2494,17 +2494,17 @@ vectorise_stan_lik = function(model_file, model_data, family = 'poisson',
         model_file <- model_file[-c(remainder_line:(remainder_line + 3))]
         model_file[remainder_line] <-
           paste0('for(s in 1:n_series){\n',
-                 'trend[4:n, s] ~ normal(drift[s] + ar1[s] * trend[3:(n - 1), s] + ar2[s] * trend[2:(n - 2), s] + ar3[s] * trend[1:(n - 3), s], sigma[s]);\n',
+                 'trend[4:n, s] ~ normal(drift[s] + ar1[s] * trend[3:(n - 1), s] + ar2[s] * trend[2:(n - 2), s] + ar3[s] * trend[1:(n - 3), s], sigma);\n',
                  '}')
         model_file = readLines(textConnection(model_file), n = -1)
       } else {
-        init_trend_line <- grep('trend[1, s] ~ normal(0, sigma[s])',
+        init_trend_line <- grep('trend[1, s] ~ normal(0, sigma)',
                                 model_file, fixed = TRUE) - 1
         model_file <- model_file[-c(init_trend_line:(init_trend_line + 2))]
         model_file[init_trend_line] <-
           'trend[1, 1:n_series] ~ normal(0, sigma);'
 
-        second_line <- grep('trend[2, s] ~ normal(trend[1, s] * ar1[s], sigma[s])',
+        second_line <- grep('trend[2, s] ~ normal(trend[1, s] * ar1[s], sigma)',
                             model_file, fixed = TRUE) - 1
         model_file <- model_file[-c(second_line:(second_line + 2))]
         model_file[second_line] <-
@@ -2521,7 +2521,7 @@ vectorise_stan_lik = function(model_file, model_data, family = 'poisson',
         model_file <- model_file[-c(remainder_line:(remainder_line + 3))]
         model_file[remainder_line] <-
           paste0('for(s in 1:n_series){\n',
-                 'trend[4:n, s] ~ normal(ar1[s] * trend[3:(n - 1), s] + ar2[s] * trend[2:(n - 2), s] + ar3[s] * trend[1:(n - 3), s], sigma[s]);\n',
+                 'trend[4:n, s] ~ normal(ar1[s] * trend[3:(n - 1), s] + ar2[s] * trend[2:(n - 2), s] + ar3[s] * trend[1:(n - 3), s], sigma);\n',
                  '}')
         model_file = readLines(textConnection(model_file), n = -1)
       }
@@ -2587,8 +2587,8 @@ vectorise_stan_lik = function(model_file, model_data, family = 'poisson',
       paste0('generated quantities {\n',
              'matrix[n_series, n_series] Sigma;')
     model_file = readLines(textConnection(model_file), n = -1)
-    model_file <- model_file[-c((grep("tau[s] = pow(sigma[s], -2.0);", model_file, fixed = TRUE) - 1):
-                                  (grep("tau[s] = pow(sigma[s], -2.0);" , model_file, fixed = TRUE) + 1))]
+    model_file <- model_file[-c((grep("tau[s] = pow(sigma, -2.0);", model_file, fixed = TRUE) - 1):
+                                  (grep("tau[s] = pow(sigma, -2.0);" , model_file, fixed = TRUE) + 1))]
     model_file[grep("// posterior predictions" , model_file, fixed = TRUE) - 1] <-
       paste0('Sigma = diag_matrix(square(sigma));\n')
     model_file = readLines(textConnection(model_file), n = -1)
