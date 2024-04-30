@@ -135,7 +135,7 @@ add_base_dgam_lines = function(use_lv, stan = FALSE, offset = FALSE){
     row_vector[num_basis] b_raw;
 
     // latent trend variance parameters
-    vector<lower=0>[n_series] sigma;
+    real<lower=0> sigma;
 
     // latent trends
     matrix[n, n_series] trend;
@@ -183,11 +183,11 @@ add_base_dgam_lines = function(use_lv, stan = FALSE, offset = FALSE){
 
     generated quantities {
     vector[n_sp] rho;
-    vector[n_series] tau;
+    real<lower=0> tau;
     matrix[n, n_series] ypred;
     rho = log(lambda);
     for (s in 1:n_series) {
-    tau[s] = pow(sigma[s], -2.0);
+    tau = pow(sigma, -2.0);
     }
 
     // posterior predictions
