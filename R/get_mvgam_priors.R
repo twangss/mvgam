@@ -776,9 +776,9 @@ get_mvgam_priors = function(formula,
         trend_df <- data.frame(param_name = c('vector<lower=0>[n_series] sigma'),
                                param_length = length(unique(data_train$series)),
                                param_info = 'trend sd (for each series s)',
-                               prior = c('sigma[s] ~ dexp(1)T(0.075, 5)'),
+                               prior = c('sigma[1] ~ dexp(1)T(0.075, 5)'),
                                example_change = c(
-                                 paste0('sigma[s] ~ dexp(',
+                                 paste0('sigma[1] ~ dexp(',
                                         round(runif(min = 0.01, max = 1, n = 1), 2),
                                         ')'
                                  )))
@@ -947,7 +947,7 @@ get_mvgam_priors = function(formula,
                                param_info = c('trend AR1 coefficient (for each series s)',
                                               'trend sd (for each series s)'),
                                prior = c('ar1[s] ~ dnorm(0, 10)',
-                                         'sigma[s] ~ dexp(2)T(0.075, 5)'),
+                                         'sigma[1] ~ dexp(2)T(0.075, 5)'),
                                example_change = c(paste0(
                                  'ar1[s] ~ dnorm(',
                                  round(runif(min = -1, max = 1, n = 1), 2),
@@ -955,7 +955,7 @@ get_mvgam_priors = function(formula,
                                  round(runif(min = 0.1, max = 1, n = 1), 2),
                                  ')'
                                ),
-                               paste0('sigma[s] ~ dexp(',
+                               paste0('sigma[1] ~ dexp(',
                                       round(runif(min = 0.01, max = 1, n = 1), 2),
                                       ')'
                                )))
@@ -1019,7 +1019,7 @@ get_mvgam_priors = function(formula,
                                               'trend sd (for each series s)'),
                                prior = c('ar1[s] ~ dnorm(0, 10)',
                                          'ar2[s] ~ dnorm(0, 10)',
-                                         'sigma[s] ~ dexp(2)T(0.075, 5)'),
+                                         'sigma[1] ~ dexp(2)T(0.075, 5)'),
                                example_change = c(paste0(
                                  'ar1[s] ~ dnorm(',
                                  round(runif(min = -1, max = 1, n = 1), 2),
@@ -1034,7 +1034,7 @@ get_mvgam_priors = function(formula,
                                  round(runif(min = 0.1, max = 1, n = 1), 2),
                                  ')'
                                ),
-                               paste0('sigma[s] ~ dexp(',
+                               paste0('sigma[1] ~ dexp(',
                                       round(runif(min = 0.01, max = 1, n = 1), 2),
                                       ')'
                                )))
@@ -1115,7 +1115,7 @@ get_mvgam_priors = function(formula,
                                prior = c('ar1[s] ~ dnorm(0, 10)',
                                          'ar2[s] ~ dnorm(0, 10)',
                                          'ar3[s] ~ dnorm(0, 10)',
-                                         'sigma[s] ~ dexp(2)T(0.075, 5)'),
+                                         'sigma[1] ~ dexp(2)T(0.075, 5)'),
                                example_change = c(paste0(
                                  'ar1[s] ~ dnorm(',
                                  round(runif(min = -1, max = 1, n = 1), 2),
@@ -1137,7 +1137,7 @@ get_mvgam_priors = function(formula,
                                  round(runif(min = 0.1, max = 1, n = 1), 2),
                                  ')'
                                ),
-                               paste0('sigma[s] ~ dexp(',
+                               paste0('sigma[1] ~ dexp(',
                                       round(runif(min = 0.01, max = 1, n = 1), 2),
                                       ')'
                                )))
