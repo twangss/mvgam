@@ -165,11 +165,11 @@ add_base_dgam_lines = function(use_lv, stan = FALSE, offset = FALSE){
 
     // trend estimates
     for (s in 1:n_series) {
-    trend[1, s] ~ normal(0, sigma[s]);
+    trend[1, s] ~ normal(0, sigma);
     }
 
     for (s in 1:n_series) {
-    trend[2:n, s] ~ normal(trend[1:(n - 1), s], sigma[s]);
+    trend[2:n, s] ~ normal(trend[1:(n - 1), s], sigma);
     }
 
     // likelihood functions

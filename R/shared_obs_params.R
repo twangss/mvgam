@@ -42,18 +42,18 @@ shared_obs_params = function(model_file, family){
                     model_file, fixed = TRUE)] <-
       "real<lower=0> sigma;"
 
-  model_file[grep("trend[2 : n, s] ~ normal(trend[1 : (n - 1), s], sigma[s]);",
+  model_file[grep("sigma[s]",
                   model_file, fixed = TRUE)] <-
-    "trend[2 : n, s] ~ normal(trend[1 : (n - 1), s], sigma);"
+    "sigma"
 
 
   model_file[grep("vector[n_series] tau;",
                   model_file, fixed = TRUE)] <-
     "real<lower=0> tau;"
 
-  model_file[grep("tau[s] = pow(sigma[s], -2.0);",
-                  model_file, fixed = TRUE)] <-
-    "tau = pow(sigma, -2.0);"
+  # model_file[grep("tau[s] = pow(sigma[s], -2.0);",
+  #                 model_file, fixed = TRUE)] <-
+  #   "tau = pow(sigma, -2.0);"
   }
 
   if(family == 'student'){

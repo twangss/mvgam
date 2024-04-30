@@ -1693,6 +1693,10 @@ mvgam = function(formula,
                                vectorised$model_file, fixed = TRUE)] <-
       "tau = pow(sigma, -2.0);"
 
+    model_file[grep("sigma[s]",
+                    model_file, fixed = TRUE)] <-
+      "sigma"
+
     # Tidy the representation
     vectorised$model_file <- sanitise_modelfile(vectorised$model_file)
 
