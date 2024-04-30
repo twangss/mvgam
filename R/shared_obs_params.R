@@ -16,10 +16,6 @@ shared_obs_params = function(model_file, family){
                     model_file, fixed = TRUE)] <-
       "real<lower=0> sigma_obs;"
 
-    model_file[grep("vector<lower=0>[n_series] sigma;",
-                    model_file, fixed = TRUE)] <-
-      "real<lower=0> sigma;"
-
     model_file <- model_file[-grep("flat_sigma_obs = rep_each(sigma_obs, n)[obs_ind];" ,
                                    model_file, fixed = TRUE)]
     model_file <- model_file[-grep("vector[n_nonmissing] flat_sigma_obs;"   ,
@@ -41,6 +37,10 @@ shared_obs_params = function(model_file, family){
     model_file[grep("sigma_obs_vec[1:n,s] = rep_vector(sigma_obs[s], n);",
                     model_file, fixed = TRUE)] <-
       "sigma_obs_vec[1:n,s] = rep_vector(sigma_obs, n);"
+
+    model_file[grep("vector<lower=0>[n_series] sigma;",
+                    model_file, fixed = TRUE)] <-
+      "real<lower=0> sigma;"
 
   model_file[grep("trend[2 : n, s] ~ normal(trend[1 : (n - 1), s], sigma[s]);",
                   model_file, fixed = TRUE)] <-

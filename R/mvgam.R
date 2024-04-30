@@ -1672,6 +1672,26 @@ mvgam = function(formula,
       vectorised$model_file <- shared_obs_params(vectorised$model_file,
                                                  family_char)
     }
+    vectorised$model_file[grep("sigma_obs_vec[1:n,s] = rep_vector(sigma_obs[s], n);",
+                               vectorised$model_file, fixed = TRUE)] <-
+      "sigma_obs_vec[1:n,s] = rep_vector(sigma_obs, n);"
+
+    vectorised$model_file[grep("vector<lower=0>[n_series] sigma;",
+                               vectorised$model_file, fixed = TRUE)] <-
+      "real<lower=0> sigma;"
+
+    vectorised$model_file[grep("trend[2 : n, s] ~ normal(trend[1 : (n - 1), s], sigma[s]);",
+                               vectorised$model_file, fixed = TRUE)] <-
+      "trend[2 : n, s] ~ normal(trend[1 : (n - 1), s], sigma);"
+
+
+    vectorised$model_file[grep("vector[n_series] tau;",
+                               vectorised$model_file, fixed = TRUE)] <-
+      "real<lower=0> tau;"
+
+    vectorised$model_file[grep("tau[s] = pow(sigma[s], -2.0);",
+                               vectorised$model_file, fixed = TRUE)] <-
+      "tau = pow(sigma, -2.0);"
 
     # Tidy the representation
     vectorised$model_file <- sanitise_modelfile(vectorised$model_file)
